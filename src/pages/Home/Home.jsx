@@ -34,7 +34,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const handleLogin = () => {
     window.location.href =
-      "https://linkedin-gemini-googlesheet-integration.onrender.com/api/v1/auth/google";
+      "https://linkedin-gemini-gs-server.onrender.com/api/v1/auth/google";
   };
 
   return (
