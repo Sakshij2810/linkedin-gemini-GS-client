@@ -1,31 +1,41 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
+import { fetchSheetData } from "../../actions/sheetAction";
 
 const Dashboard = () => {
-  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const { sheetData, loading, error } = useSelector((state) => state.sheetData);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/sheets");
-        setData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    if (error) {
+      toast.error(error);
+      dispatch(clearErrors());
+    }
 
-    fetchData();
-  }, []);
+    dispatch(fetchSheetData());
+  }, [dispatch, error]);
 
-  return (
-    <div>
-      <h1>Dashboard</h1>
-      <ul>
-        {data.map((row, index) => (
-          <li key={index}>{row.join(", ")}</li>
-        ))}
-      </ul>
-    </div>
+  return loading ? (
+    <p>loading</p>
+  ) : (
+    <Fragment>
+      <div>
+        <h1>Dashboard</h1>
+        {sheetData.loading ? (
+          <p>Loading...</p>
+        ) : sheetData.error ? (
+          <p>Error: {sheetData.error}</p>
+        ) : (
+          <ul>
+            {sheetData.sheetData.map((row, index) => (
+              <li key={index}>{row.join(", ")}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </Fragment>
   );
 };
 
