@@ -1,22 +1,21 @@
 import * as api from "../api";
 
-//fetch sheet data
 export const fetchSheetData = () => async (dispatch) => {
   try {
     dispatch({ type: "FETCH_SHEET_DATA_REQUEST" });
 
-    const { data } = await api.fetchSheetDataApi("/sheets");
+    const { data } = await api.fetchSheetDataApi();
 
     dispatch({ type: "FETCH_SHEET_DATA_SUCCESS", payload: data });
   } catch (error) {
     dispatch({
       type: "FETCH_SHEET_DATA_FAIL",
-      payload: error.response.data.message,
+      payload: error.response ? error.response.data.message : error.message,
     });
   }
 };
 
 //clear errors
-export const clearAttendanceError = () => async (dispatch) => {
+export const clearErrors = () => (dispatch) => {
   dispatch({ type: "CLEAR_ERRORS" });
 };
