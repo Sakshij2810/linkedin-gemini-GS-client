@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: "https://linkedin-gemini-gs-server.onrender.com",
 });
 
 export const fetchSheetDataApi = () => API.get("/api/v1/sheets");
