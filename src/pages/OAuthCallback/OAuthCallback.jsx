@@ -55,8 +55,6 @@ const OAuthCallback = () => {
           dispatch(setCurrentUser(user));
           localStorage.setItem("Profile", JSON.stringify(user));
           navigate("/dashboard");
-        } else {
-          console.error("Authentication failed");
         }
       } catch (error) {
         console.error("Error during authentication", error);

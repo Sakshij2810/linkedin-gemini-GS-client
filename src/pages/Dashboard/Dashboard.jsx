@@ -1,38 +1,41 @@
+import "./Dashboard.css";
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
-import { fetchSheetData, clearErrors } from "../../actions/sheetAction";
+import TopNavbar from "../../components/TopNavbar/TopNavbar";
+import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
+import Card from "../../components/Card/Card";
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
-  const { sheetData, loading, error } = useSelector((state) => state.sheetData);
-
-  useEffect(() => {
-    // if (error) {
-    //   toast.error(error);
-    //   dispatch(clearErrors());
-    // }
-    // dispatch(fetchSheetData());
-  }, [dispatch, error]);
-
-  return loading ? (
-    <p>Loading...</p>
-  ) : (
-    <Fragment>
-      <div>
-        <h1>Dashboard</h1>
-        {/* {sheetData && sheetData.length > 0 ? (
-          <ul>
-            {sheetData.map((row, index) => (
-              <li key={index}>{row.join(", ")}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>No data available</p>
-        )} */}
+  return (
+    <div className="dashboard-container">
+      <div className="topnavbar-dashboard-container">
+        <TopNavbar />
       </div>
-    </Fragment>
+      <div className="bottom-dashboard-container">
+        <div className="leftsidebar-dashboard-container">
+          <LeftSidebar />
+        </div>
+        <div className="rightside-dashboard-container">
+          <div className="head-content-dashboard">
+            <h1>All Haleetech Apps</h1>
+            <p>
+              Click 'Access Now' to start using any Haleetech Applications. You
+              can enjoy complete access to all Haleetech apps with a single
+              Haleetech Plus Plan.{" "}
+              <Link style={{ color: "blue" }} to="learn_more">
+                Learn more
+              </Link>
+            </p>
+          </div>
+          <div className="card-dashboard-container">
+            <Card />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

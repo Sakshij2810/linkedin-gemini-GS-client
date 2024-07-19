@@ -1,0 +1,36 @@
+.card-container {
+  background-color: white;
+  /* background-color: rgb(47, 104, 238); */
+  width: 15rem;
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.icon-container-card {
+  background-color: skyblue;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.4rem;
+}
+.card-container p {
+  margin-top: -1rem;
+  padding: 0 0.5rem;
+  text-align: center;
+  color: rgb(143, 143, 143);
+  font-size: 0.8rem;
+}
+.card-container button {
+  padding: 0.4rem 1.5rem;
+  background-color: white;
+  border: 1px solid rgb(176, 176, 176);
+  color: rgb(105, 105, 105);
+  border-radius: 0.4rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+.card-container button:hover {
+  color: skyblue;
+  border: 1px solid skyblue;
+}

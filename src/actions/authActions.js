@@ -25,6 +25,12 @@ export const authenticateUser = () => async (dispatch) => {
   }
 };
 
+// Action to log out user
+export const logoutUser = () => (dispatch) => {
+  localStorage.removeItem("Profile");
+  dispatch(setCurrentUser(null));
+};
+
 // Action to clear authentication errors
 export const clearAuthErrors = () => (dispatch) => {
   dispatch({ type: "CLEAR_AUTH_ERRORS" });

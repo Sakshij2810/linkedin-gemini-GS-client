@@ -12,32 +12,15 @@
   align-items: center;
   justify-content: center;
 }
-.home-content form {
-  color: white;
-  width: 35%;
-  height: 600px;
+.home-content h1 {
+  font-size: 3rem;
+}
+
+.home-content button {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  border-radius: 1rem;
-  background-color: rgb(76, 76, 76);
-  box-shadow: 5px 5px 10px rgb(47, 47, 47);
-}
-.home-content form label {
-  /* display: flex; */
-}
-.home-content form label h2 {
-  width: 10rem;
-}
-.home-content form label input {
-  font-weight: 900;
-  padding: 0.1rem 2rem;
-  width: 20rem;
-  height: 3rem;
-}
-.home-content button {
   font-size: 1rem;
   font-weight: 900;
   cursor: pointer;
@@ -49,6 +32,16 @@
   width: 25rem;
   height: 3rem;
 }
-button:hover {
-  background-color: #232323;
+.home-content button:hover {
+  /* background-color: #232323; */
+  background-color: white;
+  color: black;
+  border: 1px solid rgb(93, 93, 93);
+}
+.logo-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
