@@ -24,8 +24,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/auth/callback" element={<OAuthCallback />} />{" "}
-          {/* Route for OAuthCallback */}
+          <Route path="/auth/google/callback" element={<OAuthCallback />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
