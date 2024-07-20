@@ -2,8 +2,13 @@ import "./Card.css";
 import React from "react";
 
 import { BsBroadcastPin } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const Card = () => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/sheet_data");
+  };
   return (
     <div className="card-container">
       <div className="icon-container-card">
@@ -16,7 +21,7 @@ const Card = () => {
       </div>
       <h4>Haleetech Connect</h4>
       <p>Integarte different applications and start automating your work. </p>
-      <button>Access Now</button>
+      <button onClick={handleClick}>Access Now</button>
     </div>
   );
 };

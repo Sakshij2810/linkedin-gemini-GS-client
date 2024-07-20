@@ -1,19 +1,19 @@
 //get sheet data
-export const sheetDataReducer = (state = { data: [] }, action) => {
+export const geminiContentReducer = (state = { data: "" }, action) => {
   switch (action.type) {
-    case "FETCH_SHEET_DATA_REQUEST":
+    case "GEMINI_RESPONSE_REQUEST":
       return {
         loading: true,
-        sheetData: [],
+        content: "",
       };
 
-    case "FETCH_SHEET_DATA_SUCCESS":
+    case "GEMINI_RESPONSE_SUCCESS":
       return {
         loading: false,
-        sheetData: action.payload,
+        content: action.payload,
       };
 
-    case "FETCH_SHEET_DATA_FAIL":
+    case "GEMINI_RESPONSE_FAIL":
       return {
         loading: false,
         error: action.payload,

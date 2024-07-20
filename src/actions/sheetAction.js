@@ -1,12 +1,14 @@
 import * as api from "../api";
 
-export const fetchSheetData = () => async (dispatch) => {
+export const fetchSheetData = (sheetId) => async (dispatch) => {
   try {
     dispatch({ type: "FETCH_SHEET_DATA_REQUEST" });
 
-    const { data } = await api.fetchSheetDataApi();
+    const token = JSON.parse(localStorage.getItem("Profile")).accessToken;
 
-    dispatch({ type: "FETCH_SHEET_DATA_SUCCESS", payload: data });
+    const { data } = await api.sendTokenToSheetApi(token, sheetId);
+
+    dispatch({ type: "FETCH_SHEET_DATA_SUCCESS", payload: data.values });
   } catch (error) {
     dispatch({
       type: "FETCH_SHEET_DATA_FAIL",
@@ -15,7 +17,7 @@ export const fetchSheetData = () => async (dispatch) => {
   }
 };
 
-//clear errors
+// Clear errors
 export const clearErrors = () => (dispatch) => {
   dispatch({ type: "CLEAR_ERRORS" });
 };

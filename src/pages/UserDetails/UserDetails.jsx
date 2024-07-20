@@ -6,7 +6,7 @@ import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
 
 const UserDetails = () => {
   const currentUser = useSelector((state) => state.currentUser);
-  //   console.log(currentUser);
+  // console.log(currentUser);
 
   return (
     <div className="user-details-container">
@@ -18,13 +18,15 @@ const UserDetails = () => {
           <LeftSidebar />
         </div>
         <div className="rightside-user-container">
-          {currentUser && (
+          {currentUser ? (
             <div className="user-details-content">
-              <p>Name: {currentUser.displayName}</p>
-              <p>Id: {currentUser.id}</p>
-              <p>Email: {currentUser.emails[0].value}</p>
+              <p>Name: {currentUser.profile.displayName}</p>
+              <p>Id: {currentUser.profile.id}</p>
+              <p>Email: {currentUser.profile.emails[0].value}</p>
               <p>Access Token: {currentUser.accessToken}</p>
             </div>
+          ) : (
+            <p>No user data available</p>
           )}
         </div>
       </div>

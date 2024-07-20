@@ -1,8 +1,19 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://linkedin-gemini-gs-server.onrender.com",
+  baseURL: "http://localhost:4000",
 });
 
-export const fetchSheetDataApi = () => API.get("/api/v1/sheets");
+const config = {
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+
+export const sendTokenToSheetApi = (token, sheetId) =>
+  API.post(`/api/v1/sheet/data`, { token, sheetId });
+
 export const redirectUserApi = () => API.get("/api/v1/auth/google/callback");
+
+export const createGeminiResponseApi = (title, imageUrls) =>
+  API.post("/api/v1/gemini/generate_content", { title, imageUrls }, config);
