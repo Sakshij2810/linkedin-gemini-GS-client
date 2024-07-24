@@ -2,14 +2,17 @@ import "./SheetData.css";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSheetData } from "../../actions/sheetAction.js";
-import { createGeminiResponse } from "../../actions/geminiAction.js";
+import {
+  createGeminiResponse,
+  geminiToDatabase,
+} from "../../actions/geminiAction.js";
 
 const SheetData = () => {
   const dispatch = useDispatch();
 
   const { loading, sheetData, error } = useSelector((state) => state.sheetData);
   const { content } = useSelector((state) => state.geminiContent);
-  // console.log(content);
+  const user = useSelector((state) => state.currentUser);
 
   const [sheetId, setSheetId] = useState("");
   const [title, setTitle] = useState("");
@@ -17,6 +20,13 @@ const SheetData = () => {
 
   const handleFetchData = () => {
     dispatch(fetchSheetData(sheetId));
+  };
+
+  const geminiData = {
+    user: user?.profile?.displayName,
+    title,
+    imageUrls: imgUrls,
+    response: content,
   };
 
   useEffect(() => {
@@ -37,6 +47,12 @@ const SheetData = () => {
     }
   }, [title, imgUrls, dispatch]);
 
+  useEffect(() => {
+    if (user && title && imgUrls.length > 0 && content) {
+      dispatch(geminiToDatabase(geminiData));
+    }
+  }, [user, title, imgUrls, content, dispatch]);
+
   return (
     <div className="sheet-data-container">
       <h1>Fetch Google Sheets Data</h1>
@@ -53,6 +69,7 @@ const SheetData = () => {
         </button>
       </div>
       {content && <p style={{ padding: "1rem 5rem" }}>{content}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 };

@@ -7,8 +7,23 @@ import { Link } from "react-router-dom";
 import TopNavbar from "../../components/TopNavbar/TopNavbar";
 import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
 import Card from "../../components/Card/Card";
+import { createUser } from "../../actions/userAction";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.currentUser);
+
+  const userData = {
+    username: user.profile.displayName,
+    email: user.profile.emails[0].value,
+    id: user.profile.id,
+    accesstoken: user.accessToken,
+  };
+
+  useEffect(() => {
+    dispatch(createUser(userData));
+  }, []);
+
   return (
     <div className="dashboard-container">
       <div className="topnavbar-dashboard-container">

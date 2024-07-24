@@ -4,13 +4,19 @@ import { thunk } from "redux-thunk";
 //import reducers
 import { sheetDataReducer } from "./reducers/sheetDataReducer.js";
 import currentUserReducer from "./reducers/currentUserReducer.js";
-import { geminiContentReducer } from "./reducers/geminiReducer.js";
+import {
+  geminiContentReducer,
+  geminiToDatabaseReducer,
+} from "./reducers/geminiReducer.js";
+import { createUserReducer } from "./reducers/userReducer.js";
 
 // Combine reducers if you have multiple reducers
 const rootReducer = combineReducers({
   sheetData: sheetDataReducer,
   currentUser: currentUserReducer,
   geminiContent: geminiContentReducer,
+  geminiToDatabase: geminiToDatabaseReducer,
+  userData: createUserReducer,
 });
 
 // Create Redux store
