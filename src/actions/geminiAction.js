@@ -18,7 +18,7 @@ export const createGeminiResponse = (title, imageUrls) => async (dispatch) => {
 export const geminiToDatabase = (geminiData) => async (dispatch) => {
   try {
     dispatch({ type: "GEMINI_DATABASE_REQUEST" });
-    console.log(geminiData);
+    // console.log(geminiData);
 
     const { data } = await api.geminiToDatabaseApi(geminiData);
 

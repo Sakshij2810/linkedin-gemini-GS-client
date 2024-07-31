@@ -30,3 +30,33 @@ const OAuthCallback = () => {
 };
 
 export default OAuthCallback;
+
+// import React, { useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// import { setCurrentUser } from "../../actions/setCurrentUserAction.js";
+
+// const OAuthCallback = () => {
+//   const navigate = useNavigate();
+//   const dispatch = useDispatch();
+
+//   useEffect(() => {
+//     const handleAuthentication = async () => {
+//       const queryParams = new URLSearchParams(window.location.search);
+//       const user = JSON.parse(decodeURIComponent(queryParams.get("user")));
+
+//       if (user) {
+//         dispatch(setCurrentUser(user));
+//         navigate("/dashboard");
+//       } else {
+//         navigate("/");
+//       }
+//     };
+
+//     handleAuthentication();
+//   }, [dispatch, navigate]);
+
+//   return <div>Loading...</div>;
+// };
+
+// export default OAuthCallback;

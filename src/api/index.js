@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API = axios.create({
   // baseURL: "http://localhost:4000",
-  baseURL: "https://linkedin-gemini-gs-server.onrender.com",
+  baseURL: "http://localhost:4000",
 });
 
 const config = {
@@ -14,6 +14,12 @@ const config = {
 //sheet api
 export const sendTokenToSheetApi = (token, sheetId) =>
   API.post(`/api/v1/sheet/data`, { token, sheetId }, config);
+
+export const getSheetIdApi = (sheetIdData) =>
+  API.post(`/api/v1/sheet/sheet_id`, sheetIdData, config);
+
+export const getSheetIdFromDatabaseApi = (email) =>
+  API.post(`/api/v1/sheet/getSheetId`, email, config);
 
 //auth api
 export const redirectUserApi = () => API.get("/api/v1/auth/google/callback");
