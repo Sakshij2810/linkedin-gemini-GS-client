@@ -1,11 +1,7 @@
 import "./SheetData.css";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchSheetData,
-  getSheetId,
-  getSheetIdFromDatabase,
-} from "../../actions/sheetAction.js";
+import { fetchSheetData, getSheetId } from "../../actions/sheetAction.js";
 import {
   createGeminiResponse,
   geminiToDatabase,
@@ -17,43 +13,37 @@ const SheetData = () => {
   const { loading, sheetData, error } = useSelector((state) => state.sheetData);
   const { content } = useSelector((state) => state.geminiContent);
   const user = useSelector((state) => state.currentUser);
+  console.log(user);
   const { sheetIdData } = useSelector((state) => state.sheetIdData);
-  const { sheetIdFromDatabase } = useSelector(
-    (state) => state.sheetIdFromDatabase
-  );
+  // const { sheetIdFromDatabase } = useSelector(
+  //   (state) => state.sheetIdFromDatabase
+  // );
 
   const [sheetId, setSheetId] = useState("");
   const [title, setTitle] = useState("");
   const [imgUrls, setImgUrls] = useState([]);
   const [previousSheetData, setPreviousSheetData] = useState([]);
-  const [emailId, setEmailId] = useState("");
 
-  // console.log(previousSheetData);
-  // console.log(sheetData);
-  console.log(emailId);
-
-  // Polling interval in milliseconds (e.g., every 60 seconds)
-  const pollingInterval = 60000;
+  const emailId = user?.googleProfile.emails[0].value;
 
   const geminiData = {
-    user: user?.profile?.displayName,
+    user: user?.googleProfile?.displayName,
     title,
     imageUrls: imgUrls,
     response: content,
   };
 
   const sheetIdToDatabase = {
-    user: user?.profile?.displayName,
+    user: user?.googleProfile?.displayName,
     title,
     imageUrls: imgUrls,
     sheetId: sheetId,
-    email: user?.profile.emails[0].value,
+    email: user?.googleProfile.emails[0].value,
   };
 
-  const handleSheetClick = (emailId) => {
-    if (emailId) {
-      setEmailId(emailId);
-      dispatch(getSheetIdFromDatabase(emailId));
+  const handleSheetClick = () => {
+    if (sheetId) {
+      dispatch(fetchSheetData(sheetId));
     }
   };
 
@@ -91,23 +81,16 @@ const SheetData = () => {
   }, [user, title, imgUrls, content, dispatch]);
 
   //fetch Sheet Data
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (sheetId) {
-        dispatch(fetchSheetData(sheetId));
-      }
-    }, pollingInterval);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     if (sheetId) {
+  //       dispatch(fetchSheetData(sheetId));
+  //     }
+  //   }, pollingInterval);
 
-    // Clear interval on component unmount
-    return () => clearInterval(intervalId);
-  }, [sheetId, dispatch]);
-
-  //sheetId To Database
-  useEffect(() => {
-    if (user && title && imgUrls.length > 0 && sheetId) {
-      dispatch(getSheetId(sheetIdToDatabase));
-    }
-  }, [user, title, imgUrls, sheetId, dispatch]);
+  //   // Clear interval on component unmount
+  //   return () => clearInterval(intervalId);
+  // }, [sheetId, dispatch]);
 
   return (
     <div className="sheet-data-container">
@@ -120,9 +103,7 @@ const SheetData = () => {
           onChange={(e) => setSheetId(e.target.value)}
         />
 
-        <button onClick={handleSheetClick(user?.profile.emails[0].value)}>
-          Fetch Id
-        </button>
+        <button onClick={handleSheetClick}>Fetch Sheet Data</button>
       </div>
       <h4>
         Your Sheet Id:{" "}

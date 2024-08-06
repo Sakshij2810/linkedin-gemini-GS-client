@@ -1,7 +1,6 @@
 import "./Dashboard.css";
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 import TopNavbar from "../../components/TopNavbar/TopNavbar";
@@ -11,18 +10,27 @@ import { createUser } from "../../actions/userAction";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.currentUser);
+  const googleProfile = useSelector((state) => state.currentUser.googleProfile);
+  const linkedInProfile = useSelector(
+    (state) => state.currentUser.linkedInProfile
+  );
 
-  const userData = {
-    username: user.profile.displayName,
-    email: user.profile.emails[0].value,
-    id: user.profile.id,
-    accesstoken: user.accessToken,
+  const handleLinkedInAuth = () => {
+    window.location.href =
+      "https://linkedin-gemini-gs-server.onrender.com/api/v1/auth/linkedin";
   };
 
   useEffect(() => {
-    dispatch(createUser(userData));
-  }, []);
+    if (googleProfile) {
+      const userData = {
+        username: googleProfile.displayName,
+        email: googleProfile.emails[0].value,
+        id: googleProfile.id,
+        accesstoken: localStorage.getItem("googleAccessToken"),
+      };
+      dispatch(createUser(userData));
+    }
+  }, [googleProfile, dispatch]);
 
   return (
     <div className="dashboard-container">
@@ -47,6 +55,9 @@ const Dashboard = () => {
           </div>
           <div className="card-dashboard-container">
             <Card />
+            <button onClick={handleLinkedInAuth}>
+              Authenticate with LinkedIn
+            </button>
           </div>
         </div>
       </div>

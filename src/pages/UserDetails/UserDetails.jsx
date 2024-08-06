@@ -7,6 +7,7 @@ import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
 const UserDetails = () => {
   const currentUser = useSelector((state) => state.currentUser);
   // console.log(currentUser);
+  const token = localStorage.getItem("googleAccessToken");
 
   return (
     <div className="user-details-container">
@@ -20,10 +21,10 @@ const UserDetails = () => {
         <div className="rightside-user-container">
           {currentUser ? (
             <div className="user-details-content">
-              <p>Name: {currentUser.profile.displayName}</p>
-              <p>Id: {currentUser.profile.id}</p>
-              <p>Email: {currentUser.profile.emails[0].value}</p>
-              <p>Access Token: {currentUser.accessToken}</p>
+              <p>Name: {currentUser.googleProfile.displayName}</p>
+              <p>Id: {currentUser.googleProfile.id}</p>
+              <p>Email: {currentUser.googleProfile.emails[0].value}</p>
+              <p>Access Token: {token}</p>
             </div>
           ) : (
             <p>No user data available</p>

@@ -63,27 +63,27 @@ export const sheetIdReducer = (state = { data: [] }, action) => {
 };
 
 //get sheet id from database
-export const sheetIdFromDatabaseReducer = (state = { data: "" }, action) => {
-  switch (action.type) {
-    case "SHEETIS_DATABASE_SUCCESS":
-      return {
-        loading: false,
-        sheetIdFromDatabase: action.payload,
-      };
+// export const sheetIdFromDatabaseReducer = (state = { data: "" }, action) => {
+//   switch (action.type) {
+//     case "SHEETIS_DATABASE_SUCCESS":
+//       return {
+//         loading: false,
+//         sheetIdFromDatabase: action.payload,
+//       };
 
-    case "SHEETIS_DATABASE__FAIL":
-      return {
-        loading: false,
-        error: action.payload,
-      };
+//     case "SHEETIS_DATABASE__FAIL":
+//       return {
+//         loading: false,
+//         error: action.payload,
+//       };
 
-    case "CLEAR_ERRORS":
-      return {
-        ...state,
-        error: null,
-      };
+//     case "CLEAR_ERRORS":
+//       return {
+//         ...state,
+//         error: null,
+//       };
 
-    default:
-      return state;
-  }
-};
+//     default:
+//       return state;
+//   }
+// };

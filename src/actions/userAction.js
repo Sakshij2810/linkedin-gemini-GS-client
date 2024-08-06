@@ -3,6 +3,7 @@ import * as api from "../api";
 export const createUser = (userData) => async (dispatch) => {
   try {
     dispatch({ type: "CREATE_USER_REQUEST" });
+    // console.log(userData);
 
     const { data } = await api.createUserApi(userData);
 

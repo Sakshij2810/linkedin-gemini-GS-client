@@ -1,10 +1,11 @@
 import * as api from "../api";
 
+// Fetch sheet data using the access token stored as googleAccessToken
 export const fetchSheetData = (sheetId) => async (dispatch) => {
   try {
     dispatch({ type: "FETCH_SHEET_DATA_REQUEST" });
 
-    const token = JSON.parse(localStorage.getItem("Profile")).accessToken;
+    const token = localStorage.getItem("googleAccessToken");
 
     const { data } = await api.sendTokenToSheetApi(token, sheetId);
     // console.log(data);
@@ -18,11 +19,10 @@ export const fetchSheetData = (sheetId) => async (dispatch) => {
   }
 };
 
-//get sheet id and save it to database
+// Save the sheet ID to the database
 export const getSheetId = (sheetIdData) => async (dispatch) => {
   try {
     dispatch({ type: "GET_SHEETID_REQUEST" });
-    // console.log(sheetIdData);
 
     const { data } = await api.getSheetIdApi(sheetIdData);
 
@@ -30,22 +30,6 @@ export const getSheetId = (sheetIdData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "GET_SHEETID_FAIL",
-      payload: error.response.data.message,
-    });
-  }
-};
-
-//get saved sheet id from database
-export const getSheetIdFromDatabase = (email) => async (dispatch) => {
-  try {
-    // console.log(sheetIdData);
-
-    const { data } = await api.getSheetIdFromDatabaseApi(email);
-
-    dispatch({ type: "SHEETIS_DATABASE_SUCCESS", payload: data });
-  } catch (error) {
-    dispatch({
-      type: "SHEETIS_DATABASE__FAIL",
       payload: error.response.data.message,
     });
   }

@@ -4,7 +4,7 @@ import { thunk } from "redux-thunk";
 //import reducers
 import {
   sheetDataReducer,
-  sheetIdFromDatabaseReducer,
+  // sheetIdFromDatabaseReducer,
   sheetIdReducer,
 } from "./reducers/sheetDataReducer.js";
 import currentUserReducer from "./reducers/currentUserReducer.js";
@@ -18,7 +18,7 @@ import { createUserReducer } from "./reducers/userReducer.js";
 const rootReducer = combineReducers({
   sheetData: sheetDataReducer,
   sheetIdData: sheetIdReducer,
-  sheetIdFromDatabase: sheetIdFromDatabaseReducer,
+  // sheetIdFromDatabase: sheetIdFromDatabaseReducer,
   currentUser: currentUserReducer,
   geminiContent: geminiContentReducer,
   geminiToDatabase: geminiToDatabaseReducer,
